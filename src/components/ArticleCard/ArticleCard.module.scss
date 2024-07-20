@@ -1,0 +1,27 @@
+.card {
+  width: 65%;
+  min-height: 810px;
+  margin: 0 auto 50px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+
+  &__item {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  &__content {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.75);
+    overflow-wrap: break-word;
+
+    p {
+      margin: 0;
+      margin-bottom: 5px;
+    }
+  }
+}
