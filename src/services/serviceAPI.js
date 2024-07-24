@@ -5,17 +5,25 @@ const serviceAPI = createApi({
   reducerPath: 'serviceAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://blog.kata.academy/api/',
+    prepareHeaders: (headers) => {
+      if (localStorage.getItem('token')) {
+        headers.set('Authorization', `Token ${localStorage.getItem('token')}`);
+      }
+
+      headers.set('Content-Type', 'application/json');
+    },
   }),
-  endpoints: (build) => ({
-    getArticleList: build.query({
-      query: (page, limit = 5, offset = (page - 1) * limit) =>
-        `articles?${limit && `limit=${limit}`}&${offset !== 0 ? `offset=${offset}` : `offset=${0}`}`,
-    }),
-    getArticle: build.query({
-      query: (slug) => `articles/${slug}`,
-    }),
-  }),
+  tagTypes: ['Article'],
+  endpoints: () => ({}),
+  // endpoints: (build) => ({
+  //   getArticleList: build.query({
+  //     query: (page, limit = 5, offset = (page - 1) * limit) =>
+  //       `articles?${limit && `limit=${limit}`}&${offset !== 0 ? `offset=${offset}` : `offset=${0}`}`,
+  //   }),
+  //   getArticle: build.query({
+  //     query: (slug) => `articles/${slug}`,
+  //   }),
+  // }),
 });
 
-export const { useGetArticleListQuery, useGetArticleQuery } = serviceAPI;
 export default serviceAPI;

@@ -2,16 +2,18 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import Header from '../Header/Header';
+
 import cl from './Layout.module.scss';
 
 function Layout() {
   return (
-    <>
-      <header>Здесь будет ХЕДЕР</header>
+    <div className={cl.wrapper}>
+      <Header />
       <main className={cl.layout}>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }
 

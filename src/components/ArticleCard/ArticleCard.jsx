@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Spinner from '../UI/Spinner/Spinner';
 import ErrorMessage from '../UI/Messages/ErrorMessage';
 import Article from '../Article/Article';
-import { useGetArticleQuery } from '../../services/serviceAPI';
+import { useGetArticleQuery } from '../../services/articleService';
 
 import cl from './ArticleCard.module.scss';
 
@@ -19,7 +19,7 @@ function ArticleCard() {
     return null;
   }
 
-  const { title, tagList, favorited, body, favoritesCount, description, createdAt, slug, author } = data.article;
+  const { title, tagList, favorited, body, favoritesCount, description, createdAt, slug, author } = data;
 
   return (
     <div className={cl.card}>

@@ -1,0 +1,47 @@
+.button {
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &__large {
+    padding: 14px 21px;
+    font-size: 18px;
+  }
+}
+
+.green {
+  border-radius: 5px;
+  border: 1px solid #52c41a;
+
+  color: #52c41a;
+}
+
+.blue,
+.red {
+  border-radius: 4px;
+  padding: 8px 36px;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.blue {
+  border: 1px solid #1890ff;
+  color: #1890ff;
+}
+
+.red {
+  border: 1px solid #f5222d;
+  color: #f5222d;
+}
+
+.small {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.black {
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+}

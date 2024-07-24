@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 import Article from '../Article/Article';
-import { useGetArticleListQuery } from '../../services/serviceAPI';
+import { useGetArticleListQuery } from '../../services/articleService';
 import Pagination from '../UI/Pagination/Pagination';
 import Spinner from '../UI/Spinner/Spinner';
 import ErrorMessage from '../UI/Messages/ErrorMessage';
@@ -12,7 +12,7 @@ import cl from './ArticleList.module.scss';
 function ArticleList() {
   const [page, setPage] = useState(1);
 
-  const { isLoading, isError, data } = useGetArticleListQuery(page);
+  const { isLoading, isError, data } = useGetArticleListQuery({ page });
   // console.log(isLoading, isError, data);
 
   const articleList =

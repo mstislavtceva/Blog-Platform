@@ -1,0 +1,18 @@
+.user {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  &__username {
+    font-size: 18px;
+    line-height: 156%;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  &__image {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}

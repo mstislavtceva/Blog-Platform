@@ -10,7 +10,7 @@ import cl from './Article.module.scss';
 
 function Article({ slug, favorited, favoritesCount, title, tagList, description, createdAt, avatar, username }) {
   // eslint-disable-next-line no-console
-  console.log(slug, favorited);
+  console.log(favorited);
 
   // Проверяем, чтобы можно было нажать на заголовок только на странице "/articles"
   const location = useLocation();

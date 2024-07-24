@@ -1,0 +1,21 @@
+.header {
+  border: 1px solid #ebeef3;
+  background-color: #ffffff;
+
+  &__container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 16px 22px 13px;
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: 18px;
+    color: #000000d9;
+  }
+}
