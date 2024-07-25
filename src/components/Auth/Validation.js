@@ -62,10 +62,15 @@ const getOptions = (watch = '') => ({
   image: {
     validate: (value) => isValidUrl(value) || 'Please enter a valid url',
   },
-  //   Это должно быть для статей
-  //   title: {},
-  //   description: {},
-  //   text: {},
+  title: {
+    required: 'Title field is required',
+  },
+  desc: {
+    required: 'Description filed is required',
+  },
+  text: {
+    required: 'Text field is required',
+  },
 });
 
 export default getOptions;

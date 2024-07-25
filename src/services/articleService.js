@@ -19,7 +19,40 @@ export const articleService = serviceAPI.injectEndpoints({
       transformResponse: (response) => response.article,
       providesTags: () => ['Article'],
     }),
+    createArticle: build.mutation({
+      query: (body) => ({
+        url: 'articles',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Article'],
+    }),
+    editArticle: build.mutation({
+      // eslint-disable-next-line arrow-body-style
+      query: (body) => {
+        // const { article } = body;
+        return {
+          url: `articles/${body.article.slug}`,
+          method: 'PUT',
+          body,
+        };
+      },
+      invalidatesTags: ['Article'],
+    }),
+    deleteArticle: build.mutation({
+      query: (slug) => ({
+        url: `articles/${slug}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Article'],
+    }),
   }),
 });
 
-export const { useGetArticleListQuery, useGetArticleQuery } = articleService;
+export const {
+  useGetArticleListQuery,
+  useGetArticleQuery,
+  useCreateArticleMutation,
+  useEditArticleMutation,
+  useDeleteArticleMutation,
+} = articleService;

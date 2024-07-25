@@ -1,10 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { Popconfirm } from 'antd';
 
 import HeartOff from '../UI/Hearts/HeartOff';
 import Tags from '../UI/Tags/Tags';
+import { useDeleteArticleMutation } from '../../services/articleService';
+import Button from '../UI/Button/Button';
 
 import cl from './Article.module.scss';
 
@@ -12,12 +16,37 @@ function Article({ slug, favorited, favoritesCount, title, tagList, description,
   // eslint-disable-next-line no-console
   console.log(favorited);
 
+  const navigate = useNavigate();
+  const {
+    user: { token },
+  } = useSelector((state) => state.auth);
+
   // Проверяем, чтобы можно было нажать на заголовок только на странице "/articles"
   const location = useLocation();
   const isArticles = location.pathname === '/articles';
 
+  // Функции управлением статьи
+  const [deleteArticle] = useDeleteArticleMutation();
+
   // Форматирование времени создания поста
   const createdAtDate = format(new Date(createdAt), 'MMMM d, yyyy');
+
+  const authUser = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user') || '{}').user.username;
+  let isEditMode = username === authUser;
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    isEditMode = username === authUser;
+  }, [token]);
+
+  const confirm = () => {
+    deleteArticle(slug);
+    navigate('/articles');
+  };
+
+  const editArticleHandler = () => {
+    navigate('edit');
+  };
 
   return (
     <>
@@ -39,11 +68,31 @@ function Article({ slug, favorited, favoritesCount, title, tagList, description,
         <div className={cl.desc}>{description}</div>
       </div>
       <div className={cl.article__right}>
-        <div className={cl.user}>
-          <p className={cl.user__name}>{username}</p>
-          <p className={cl.user__date}>{createdAtDate}</p>
+        <div className={cl.wrap}>
+          <div className={cl.user}>
+            <p className={cl.user__name}>{username}</p>
+            <p className={cl.user__date}>{createdAtDate}</p>
+          </div>
+          <img className={cl.user__img} src={avatar} alt="Avatar author." />
         </div>
-        <img className={cl.user__img} src={avatar} alt="Avatar author." />
+        {!isArticles && isEditMode ? (
+          <div className={`${cl.buttons}`}>
+            <Popconfirm
+              title=""
+              description="Are you sure about it?!?"
+              onConfirm={confirm}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button color="red" size="small">
+                Delete
+              </Button>
+            </Popconfirm>
+            <Button color="green" size="small" onClick={() => editArticleHandler()}>
+              Edit
+            </Button>
+          </div>
+        ) : null}
       </div>
     </>
   );

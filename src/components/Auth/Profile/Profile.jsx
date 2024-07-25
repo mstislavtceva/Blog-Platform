@@ -92,7 +92,6 @@ function Profile() {
   return (
     <div className={cl.wrapper}>
       {contextHolder}
-      {/* {contextHolder} */}
       <div className={cl.profile}>
         <h1 className={cl.profile__heading}>Edit Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)} className={cl.profile__form}>

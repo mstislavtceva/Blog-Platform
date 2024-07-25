@@ -13,9 +13,9 @@ function Tags({ tags }) {
           return;
         }
 
-        // if (tag && tag.length > 10) {
-        //   //   newTag = tag.slice(0, 10) + '...';
-        // }
+        if (tag && tag.length > 10) {
+          //   newTag = tag.slice(0, 10) + '...';
+        }
 
         if (tag) {
           newTag = tag;

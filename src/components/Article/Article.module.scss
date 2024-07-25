@@ -27,11 +27,6 @@
 }
 
 .article__right {
-  display: flex;
-  justify-content: end;
-  align-items: start;
-  width: 20%;
-
   .user {
     &__name {
       margin: 0;
@@ -52,4 +47,20 @@
       border-radius: 50%;
     }
   }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+
+  button {
+    width: 60px;
+  }
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }

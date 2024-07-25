@@ -10,6 +10,8 @@ import SignIn from '../Auth/SignIn/SignIn';
 import SignUp from '../Auth/SignUp/SignUp';
 import Profile from '../Auth/Profile/Profile';
 import { login } from '../../services/authData';
+import PrivateRoute from '../../PrivateRoute';
+import ArticleNewEdit from '../ArticleNewEdit/ArticleNewEdit';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,7 +21,6 @@ function App() {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       dispatch(login(user.user));
     }
-    console.log('no LOCAL STORAGE');
   }, [dispatch]);
 
   return (
@@ -31,6 +32,10 @@ function App() {
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="profile" element={<Profile />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="new-article" element={<ArticleNewEdit />} />
+          <Route path="/articles/:param/edit" element={<ArticleNewEdit />} />
+        </Route>
       </Route>
     </Routes>
   );
