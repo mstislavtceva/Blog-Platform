@@ -88,7 +88,6 @@ function ArticleNewEdit() {
   //   Если отправилась статья
   useEffect(() => {
     if (isSuccess && data) {
-      console.log('its done');
       // eslint-disable-next-line no-unused-expressions
       location.pathname === '/new-article' ? navigate('/articles') : navigate(`/articles/${slug}`);
       clearErrors();
@@ -103,7 +102,6 @@ function ArticleNewEdit() {
   //   Если ошибка при отправлении статьи
   useEffect(() => {
     if (error && isFetchBaseQueryError(error)) {
-      console.log('its error');
       const serverMessages = JSON.parse(JSON.stringify(error.data));
       //   eslint-disable-next-line no-restricted-syntax
       for (const key in serverMessages.errors) {

@@ -12,6 +12,7 @@ import Profile from '../Auth/Profile/Profile';
 import { login } from '../../services/authData';
 import PrivateRoute from '../../PrivateRoute';
 import ArticleNewEdit from '../ArticleNewEdit/ArticleNewEdit';
+import NotFoundPage from '../UI/Messages/NotFoundPage/NotFoundPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,8 @@ function App() {
           <Route path="new-article" element={<ArticleNewEdit />} />
           <Route path="/articles/:param/edit" element={<ArticleNewEdit />} />
         </Route>
+        {/* eslint-disable-next-line  */}
+        <Route path={'*'} element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

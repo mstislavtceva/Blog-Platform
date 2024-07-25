@@ -1,21 +1,25 @@
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Popconfirm } from 'antd';
 
-import HeartOff from '../UI/Hearts/HeartOff';
 import Tags from '../UI/Tags/Tags';
-import { useDeleteArticleMutation } from '../../services/articleService';
+import {
+  useDeleteArticleMutation,
+  useLikeArticleMutation,
+  useUnlikeArticleMutation,
+} from '../../services/articleService';
 import Button from '../UI/Button/Button';
+import HeartOff from '../UI/Hearts/HeartOff';
+import HeartOn from '../UI/Hearts/HeartOn';
 
 import cl from './Article.module.scss';
 
 function Article({ slug, favorited, favoritesCount, title, tagList, description, createdAt, avatar, username }) {
-  // eslint-disable-next-line no-console
-  console.log(favorited);
-
   const navigate = useNavigate();
   const {
     user: { token },
@@ -27,6 +31,8 @@ function Article({ slug, favorited, favoritesCount, title, tagList, description,
 
   // Функции управлением статьи
   const [deleteArticle] = useDeleteArticleMutation();
+  const [likeArticle] = useLikeArticleMutation();
+  const [unlikeArticle] = useUnlikeArticleMutation();
 
   // Форматирование времени создания поста
   const createdAtDate = format(new Date(createdAt), 'MMMM d, yyyy');
@@ -39,14 +45,35 @@ function Article({ slug, favorited, favoritesCount, title, tagList, description,
     isEditMode = username === authUser;
   }, [token]);
 
+  // Подтвердить удаление
   const confirm = () => {
     deleteArticle(slug);
     navigate('/articles');
   };
 
+  // Редактирование статьи
   const editArticleHandler = () => {
     navigate('edit');
   };
+
+  // Лайк туда-сюда
+  const toggleFavorited = favorited ? (
+    <div onClick={() => unlikeArticle(slug)}>
+      <HeartOn />
+    </div>
+  ) : (
+    <div onClick={() => likeArticle(slug)}>
+      <HeartOff />
+    </div>
+  );
+
+  const likesView = token ? (
+    toggleFavorited
+  ) : (
+    <div>
+      <HeartOff />
+    </div>
+  );
 
   return (
     <>
@@ -59,9 +86,7 @@ function Article({ slug, favorited, favoritesCount, title, tagList, description,
           ) : (
             <h3 className={cl.inner__title}>{title}</h3>
           )}
-          <div>
-            <HeartOff />
-          </div>
+          <div>{likesView}</div>
           <span className={cl.inner__likes}>{favoritesCount}</span>
         </div>
         {tagList ? <Tags tags={tagList} /> : null}

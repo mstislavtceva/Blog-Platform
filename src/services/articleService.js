@@ -46,6 +46,20 @@ export const articleService = serviceAPI.injectEndpoints({
       }),
       invalidatesTags: ['Article'],
     }),
+    likeArticle: build.mutation({
+      query: (slug) => ({
+        url: `/articles/${slug}/favorite`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Article'],
+    }),
+    unlikeArticle: build.mutation({
+      query: (slug) => ({
+        url: `/articles/${slug}/favorite`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Article'],
+    }),
   }),
 });
 
@@ -55,4 +69,6 @@ export const {
   useCreateArticleMutation,
   useEditArticleMutation,
   useDeleteArticleMutation,
+  useLikeArticleMutation,
+  useUnlikeArticleMutation,
 } = articleService;

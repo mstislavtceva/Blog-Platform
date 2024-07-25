@@ -39,8 +39,6 @@ function SignUp() {
 
   useEffect(() => {
     if (isSuccess && data) {
-      console.log(isSuccess, data);
-
       dispatch(
         login({
           username: data.user.username,
@@ -59,7 +57,6 @@ function SignUp() {
 
   useEffect(() => {
     if (error && isFetchBaseQueryError(error)) {
-      console.log(error);
       const serverMessages = JSON.parse(JSON.stringify(error.data));
       // eslint-disable-next-line no-restricted-syntax
       for (const key in serverMessages.errors) {

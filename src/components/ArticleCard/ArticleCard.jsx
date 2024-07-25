@@ -22,25 +22,27 @@ function ArticleCard() {
   const { title, tagList, favorited, body, favoritesCount, description, createdAt, slug, author } = data;
 
   return (
-    <div className={cl.card}>
-      {isLoading ? <Spinner /> : null}
-      {isError ? <ErrorMessage /> : null}
-      {!isLoading && !isError && (
-        <div className={cl.card__item}>
-          <Article
-            title={title}
-            favorited={favorited}
-            favoritesCount={favoritesCount}
-            tagList={tagList}
-            username={author.username}
-            createdAt={createdAt}
-            avatar={author.image}
-            description={description}
-            slug={slug}
-          />
-        </div>
-      )}
-      <div className={cl.card__content}>{body && <Markdown>{body}</Markdown>}</div>
+    <div className={cl.wrapper}>
+      <div className={cl.card}>
+        {isLoading ? <Spinner /> : null}
+        {isError ? <ErrorMessage /> : null}
+        {!isLoading && !isError && (
+          <div className={cl.card__item}>
+            <Article
+              title={title}
+              favorited={favorited}
+              favoritesCount={favoritesCount}
+              tagList={tagList}
+              username={author.username}
+              createdAt={createdAt}
+              avatar={author.image}
+              description={description}
+              slug={slug}
+            />
+          </div>
+        )}
+        <div className={cl.card__content}>{body && <Markdown>{body}</Markdown>}</div>
+      </div>
     </div>
   );
 }

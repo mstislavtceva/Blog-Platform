@@ -24,8 +24,8 @@
 body {
   margin: 0 auto;
   padding: 0;
-  width: 1440px;
-  min-width: 450px;
+  width: 100%;
+  min-width: 700px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
